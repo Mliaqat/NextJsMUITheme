@@ -1,6 +1,8 @@
+import { useAppDispatch } from "@root/redux/store";
 import { createContext, ReactNode, useEffect, useReducer } from "react";
 // utils
-import { isValidToken, setSession } from "../utils/jwt";
+import { getSession, isValidToken, setSession } from "../utils/jwt";
+import { setAuthTokens } from "@root/redux/slices/auth/slice";
 
 // ----------------------------------------------------------------------
 
@@ -53,30 +55,27 @@ const reducer = (state: any, action: any) =>
 const AuthContext = createContext({
   ...initialState,
   method: "jwt",
-  login: () => Promise.resolve(),
+  login: (res: any) => Promise.resolve(),
   logout: () => Promise.resolve(),
-  register: () => Promise.resolve(),
 });
 
 // ----------------------------------------------------------------------
 
 function AuthProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const appDispatch = useAppDispatch();
 
   useEffect(() => {
-    const initialize = async () => {
+    const initialize = () => {
       try {
-        const accessToken = window.localStorage.getItem("accessToken");
+        const {
+          authToken,
+          refreshToken,
+          user,
+        }: { authToken: string; refreshToken: string; user: any } =
+          getSession();
 
-        if (accessToken && isValidToken(accessToken)) {
-          setSession(accessToken);
-
-          // const response = await axios.get("/api/account/my-account");
-          // const { user } = response.data;
-          const { user } = {
-            user: { data: "somedata", message: "somemessage" },
-          };
-
+        if (authToken && isValidToken(authToken)) {
           dispatch({
             type: "INITIALIZE",
             payload: {
@@ -84,6 +83,9 @@ function AuthProvider({ children }: { children: ReactNode }) {
               user,
             },
           });
+          // Set auth tokens is redux for api headers
+          const authData: any = { authToken, refreshToken };
+          dispatch(setAuthTokens(authData));
         } else {
           dispatch({
             type: "INITIALIZE",
@@ -106,13 +108,13 @@ function AuthProvider({ children }: { children: ReactNode }) {
     };
 
     initialize();
-  }, []);
+  }, [appDispatch]);
 
-  const login = async (response: any) => {
-    // Send the response from login api
-    const { accessToken, user } = response.data;
+  const login = (response: any) => {
+    const { authToken, refreshToken, user } = response.data;
 
-    setSession(accessToken);
+    setSession({ authToken, refreshToken, user });
+
     dispatch({
       type: "LOGIN",
       payload: {

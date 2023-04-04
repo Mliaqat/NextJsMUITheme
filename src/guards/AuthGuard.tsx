@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 // hooks
 import useAuth from "../hooks/useAuth";
-import Login from "../pages/auth/login";
 // components
-// import LoadingScreen from "../components/LoadingScreen";
+import Login from "../pages/auth/login";
+import LoadingScreen from "@root/components/LoadingScreen";
 
 // ----------------------------------------------------------------------
 
@@ -24,8 +24,7 @@ export default function AuthGuard({ children }: any) {
   }, [pathname, push, requestedLocation]);
 
   if (!isInitialized) {
-    // return <LoadingScreen />;
-    return <p>LOADING...</p>;
+    return <LoadingScreen />;
   }
 
   if (!isAuthenticated) {

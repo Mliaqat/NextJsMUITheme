@@ -1,10 +1,11 @@
 // routes
-// import { PATH_DASHBOARD } from "./routes/paths";
+import { PATH_DASHBOARD } from "./routes/paths";
 
 // ROOT PATH AFTER LOGIN SUCCESSFUL
-// export const PATH_AFTER_LOGIN = PATH_DASHBOARD.general.app; // as '/dashboard/app'
+export const PATH_AFTER_LOGIN = PATH_DASHBOARD.root; // as '/dashboard/app'
 
-// LAYOUT
+// API
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 // ----------------------------------------------------------------------
 
 export const HEADER = {

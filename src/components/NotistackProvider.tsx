@@ -3,6 +3,13 @@ import { SnackbarProvider } from "notistack";
 // @mui
 import { alpha, useTheme } from "@mui/material/styles";
 import { Box, GlobalStyles, IconButton } from "@mui/material";
+
+// @mui icons
+import CloseIcon from "@mui/icons-material/Close";
+import ErrorIcon from "@mui/icons-material/Error";
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import InfoIcon from "@mui/icons-material/Info";
 // ----------------------------------------------------------------------
 
 function SnackbarStyles() {
@@ -53,6 +60,8 @@ export default function NotistackProvider({
   children: ReactNode;
 }) {
   const notistackRef: any = useRef(null);
+  const theme = useTheme();
+  const iconColor = theme.palette.grey["100"];
 
   const onClose = (key: string) => () => {
     notistackRef.current.closeSnackbar(key);
@@ -69,25 +78,37 @@ export default function NotistackProvider({
         preventDuplicate
         autoHideDuration={3000}
         variant="success" // Set default variant
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         iconVariant={{
-          info: <SnackbarIcon icon={"eva:info-fill"} color="info" />,
+          info: (
+            <SnackbarIcon
+              icon={<InfoIcon htmlColor={iconColor} />}
+              color="info"
+            />
+          ),
           success: (
             <SnackbarIcon
-              icon={"eva:checkmark-circle-2-fill"}
+              icon={<CheckCircleIcon htmlColor={iconColor} />}
               color="success"
             />
           ),
           warning: (
-            <SnackbarIcon icon={"eva:alert-triangle-fill"} color="warning" />
+            <SnackbarIcon
+              icon={<ReportProblemIcon htmlColor={iconColor} />}
+              color="warning"
+            />
           ),
-          error: <SnackbarIcon icon={"eva:alert-circle-fill"} color="error" />,
+          error: (
+            <SnackbarIcon
+              icon={<ErrorIcon htmlColor={iconColor} />}
+              color="error"
+            />
+          ),
         }}
         // With close as default
         action={(key: any) => (
           <IconButton size="small" onClick={onClose(key)} sx={{ p: 0.5 }}>
-            {/* <Iconify icon={"eva:close-fill"} /> */}
-            place icon here
+            <CloseIcon htmlColor={iconColor} />
           </IconButton>
         )}
       >
@@ -115,8 +136,7 @@ function SnackbarIcon({ icon, color }: any) {
         bgcolor: (theme: any) => alpha(theme.palette[color].main, 0.16),
       }}
     >
-      {/* <Iconify icon={icon} width={24} height={24} /> */}
-      place icon here too
+      {icon}
     </Box>
   );
 }

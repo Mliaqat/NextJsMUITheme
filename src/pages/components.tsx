@@ -1,34 +1,33 @@
+// next-i18
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 // @mui
 import Grid from "@mui/material/Grid";
 import ComponentsBox from "@root/components/ComponentsBox";
-import MyAvatar from "@root/components/MyAvatar";
 // components
 import Page from "@root/components/Page";
-import ThemeSettings from "@root/sections/examples/theme/ThemeSettings";
-import { ReactHookForm } from "@root/sections/examples/form";
-// next-i18
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import ThemeSettings from "@root/sections/overview/theme/ThemeSettings";
+import { ReactHookForm } from "@root/sections/overview/form";
 
 // ----------------------------------------------------------------------
 
-export default function HomePage() {
+//Constants
+const fullWidth = { gridSize: { xs: 12, md: 12, lg: 12 } };
+// ----------------------------------------------------------------------
+
+export default function Components() {
   return (
     <Page title="Components" sx={{ padding: 6 }}>
-      <Grid container sx={{ gap: 4 }}>
+      <Grid container sx={{ gap: 3.4 }} alignItems="flex-start">
         <ComponentsBox title="Theming">
           <ThemeSettings />
         </ComponentsBox>
 
-        <ComponentsBox title="Avatars">
-          <MyAvatar />
-        </ComponentsBox>
+        {/* <ComponentsBox title="Avatars">
+        </ComponentsBox> */}
 
         <ComponentsBox title="React Hook Form">
           <ReactHookForm />
         </ComponentsBox>
-        <ComponentsBox title="Buttons"></ComponentsBox>
-        <ComponentsBox title="Calendars"></ComponentsBox>
-        <ComponentsBox title="Charts"></ComponentsBox>
       </Grid>
     </Page>
   );

@@ -1,14 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import layoutReducer from "./slices/layout/slice";
+import authReducer from "./slices/auth/slice";
+import { baseAPI } from "@root/services/baseApi";
+
 const store = configureStore({
   reducer: {
-    layout: layoutReducer,
+    auth: authReducer,
+    [baseAPI.reducerPath]: baseAPI.reducer,
   },
+  middleware: (defaultMiddleware) =>
+    defaultMiddleware().concat(baseAPI.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;
-// Export a hook that can be reused to resolve types
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export type RootState = ReturnType<typeof store.getState>;

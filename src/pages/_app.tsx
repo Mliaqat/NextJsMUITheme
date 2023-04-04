@@ -8,6 +8,9 @@ import cookie from "cookie";
 // highlight
 import "../utils/highlight";
 
+// editor
+import "react-quill/dist/quill.snow.css";
+
 // next
 import Head from "next/head";
 import App from "next/app";
@@ -27,7 +30,7 @@ import { getSettings } from "@root/utils/settings";
 import ThemeProvider from "@root/theme";
 
 // contexts
-import { AuthProvider } from "@root/contexts/JWTContext";
+import { AuthProvider } from "@root/contexts/AuthContext";
 import { CollapseDrawerProvider } from "@root/contexts/CollapseDrawerContext";
 import { SettingsProvider } from "@root/contexts/SettingsContext";
 
@@ -49,8 +52,8 @@ function MyApp(props: any) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
 
-      <AuthProvider>
-        <ReduxProvider store={store}>
+      <ReduxProvider store={store}>
+        <AuthProvider>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <CollapseDrawerProvider>
               <SettingsProvider defaultSettings={settings}>
@@ -69,8 +72,8 @@ function MyApp(props: any) {
               </SettingsProvider>
             </CollapseDrawerProvider>
           </LocalizationProvider>
-        </ReduxProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </ReduxProvider>
     </>
   );
 }

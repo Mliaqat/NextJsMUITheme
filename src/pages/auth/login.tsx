@@ -1,5 +1,5 @@
-// next
-import NextLink from "next/link";
+// next-i18
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 // @mui
 import { styled } from "@mui/material/styles";
 import { Card, Container } from "@mui/material";
@@ -12,10 +12,10 @@ import useResponsive from "../../hooks/useResponsive";
 import GuestGuard from "@root/guards/GuestGuard";
 // components
 import Page from "../../components/Page";
+import LoginForm from "@root/sections/auth/login/LoginForm";
 // import Logo from "../../components/Logo";
 // import Image from "../../components/Image";
 // sections
-// import { LoginForm } from "../../sections/auth/login";
 
 // ----------------------------------------------------------------------
 
@@ -49,10 +49,18 @@ export default function Login() {
       <Page title="Login">
         <RootStyle>
           <Container maxWidth="sm">
-            <ContentStyle>Login</ContentStyle>
+            <ContentStyle>
+              <LoginForm />
+            </ContentStyle>
           </Container>
         </RootStyle>
       </Page>
     </GuestGuard>
   );
 }
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale ?? "en", ["common", "login"])),
+  },
+});

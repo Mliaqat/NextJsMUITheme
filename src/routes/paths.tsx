@@ -31,7 +31,7 @@ export const PATH_PAGE = {
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
   general: {
-    app: path(ROOTS_DASHBOARD, "/app"),
+    info: path(ROOTS_DASHBOARD, "/info"),
     booking: path(ROOTS_DASHBOARD, "/booking"),
   },
   mail: {

@@ -29,7 +29,7 @@ const RootStyle = styled(Box)(({ theme }: any) => ({
   overflow: "hidden",
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  border: `solid 1px ${theme.palette.grey[500_32]}`,
+  border: `solid 1px ${theme.palette.grey["500_32"]}`,
   "& .ql-container.ql-snow": {
     borderColor: "transparent",
     ...theme.typography.body1,

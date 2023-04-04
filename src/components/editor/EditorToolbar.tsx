@@ -1,34 +1,41 @@
-import PropTypes from 'prop-types';
-import EditorToolbarStyle from './EditorToolbarStyle';
+import PropTypes from "prop-types";
+import EditorToolbarStyle from "./EditorToolbarStyle";
 
 // ----------------------------------------------------------------------
 
-const HEADINGS = ['Heading 1', 'Heading 2', 'Heading 3', 'Heading 4', 'Heading 5', 'Heading 6'];
+const HEADINGS = [
+  "Heading 1",
+  "Heading 2",
+  "Heading 3",
+  "Heading 4",
+  "Heading 5",
+  "Heading 6",
+];
 
 export const formats = [
-  'align',
-  'background',
-  'blockquote',
-  'bold',
-  'bullet',
-  'code',
-  'code-block',
-  'color',
-  'direction',
-  'font',
-  'formula',
-  'header',
-  'image',
-  'indent',
-  'italic',
-  'link',
-  'list',
-  'script',
-  'size',
-  'strike',
-  'table',
-  'underline',
-  'video',
+  "align",
+  "background",
+  "blockquote",
+  "bold",
+  "bullet",
+  "code",
+  "code-block",
+  "color",
+  "direction",
+  "font",
+  "formula",
+  "header",
+  "image",
+  "indent",
+  "italic",
+  "link",
+  "list",
+  "script",
+  "size",
+  "strike",
+  "table",
+  "underline",
+  "video",
 ];
 
 EditorToolbar.propTypes = {
@@ -36,7 +43,7 @@ EditorToolbar.propTypes = {
   isSimple: PropTypes.bool,
 };
 
-export default function EditorToolbar({ id, isSimple, ...other }) {
+export default function EditorToolbar({ id, isSimple, ...other }: any) {
   return (
     <EditorToolbarStyle {...other}>
       <div id={id}>
@@ -68,8 +75,12 @@ export default function EditorToolbar({ id, isSimple, ...other }) {
         <div className="ql-formats">
           <button type="button" className="ql-list" value="ordered" />
           <button type="button" className="ql-list" value="bullet" />
-          {!isSimple && <button type="button" className="ql-indent" value="-1" />}
-          {!isSimple && <button type="button" className="ql-indent" value="+1" />}
+          {!isSimple && (
+            <button type="button" className="ql-indent" value="-1" />
+          )}
+          {!isSimple && (
+            <button type="button" className="ql-indent" value="+1" />
+          )}
         </div>
 
         {!isSimple && (

@@ -26,6 +26,7 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
       typography,
       breakpoints,
       shape: { borderRadius: 8 },
+      spacing: 10,
       direction: themeDirection,
       shadows: isLight ? shadows.light : shadows.dark,
       customShadows: isLight ? customShadows.light : customShadows.dark,

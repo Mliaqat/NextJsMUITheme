@@ -1,20 +1,18 @@
 import { useState, useRef } from "react";
 // form
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 // @mui
 import {
   Stack,
   Grid,
   Button,
-  TextField,
   Typography,
   IconButton,
   InputAdornment,
   FormHelperText,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import DatePicker from "@mui/lab/DatePicker";
 // utils
 import { fData } from "../../../utils/formatNumber";
 import { fTimestamp } from "../../../utils/formatTime";
@@ -48,7 +46,6 @@ export default function ReactHookForm() {
   });
 
   const {
-    watch,
     reset,
     control,
     register,
@@ -57,7 +54,7 @@ export default function ReactHookForm() {
     formState: { errors, isSubmitting, isDirty },
   } = methods;
 
-  const values: any = watch();
+  const photo = useWatch({ control, name: "photo" });
 
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
@@ -84,6 +81,16 @@ export default function ReactHookForm() {
     reset();
   };
 
+  const passwordEndAdornment = {
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton onClick={handleShowPassword} edge="end">
+          {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+        </IconButton>
+      </InputAdornment>
+    ),
+  };
+
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
@@ -91,7 +98,7 @@ export default function ReactHookForm() {
           <Stack spacing={3}>
             <RHFTextField name="fullName" label="Full Name" />
             <RHFTextField name="email" label="Email address" />
-            <RHFTextField name="age" label="Age" />
+            <RHFTextField name="age" label="Age" type="number" />
 
             <Stack
               spacing={{ xs: 2, sm: 3 }}
@@ -105,44 +112,22 @@ export default function ReactHookForm() {
               name="password"
               label="Password"
               type={showPassword ? "text" : "password"}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handleShowPassword} edge="end">
-                      {showPassword ? (
-                        <VisibilityIcon />
-                      ) : (
-                        <VisibilityOffIcon />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
+              InputProps={passwordEndAdornment}
             />
 
             <RHFTextField
               name="confirmPassword"
               label="Confirm Password"
               type={showPassword ? "text" : "password"}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handleShowPassword} edge="end">
-                      {showPassword ? (
-                        <VisibilityIcon />
-                      ) : (
-                        <VisibilityOffIcon />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
+              InputProps={passwordEndAdornment}
             />
           </Stack>
         </Grid>
 
         <Grid item xs={12}>
-          <Stack spacing={3}>
+          <RHFEditor name="editor" />
+
+          <Stack spacing={3} sx={{ marginTop: 3 }}>
             <div>
               <Stack direction="row" alignItems="center" spacing={3}>
                 <Button
@@ -155,17 +140,15 @@ export default function ReactHookForm() {
                 </Button>
 
                 <div>
-                  {values.photo?.name && (
-                    <Typography variant="subtitle2">
-                      {values.photo.name}
-                    </Typography>
+                  {photo?.name && (
+                    <Typography variant="subtitle2">{photo.name}</Typography>
                   )}
-                  {values.photo?.size && (
+                  {photo?.size && (
                     <Typography
                       variant="caption"
                       sx={{ color: "text.secondary" }}
                     >
-                      {fData(values.photo.size)}
+                      {fData(photo.size)}
                     </Typography>
                   )}
                 </div>

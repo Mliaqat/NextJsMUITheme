@@ -111,6 +111,7 @@ function useSettingCookies(defaultSettings: any) {
 
   useEffect(() => {
     onChangeSetting();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings]);
 
   return [settings, setSettings];

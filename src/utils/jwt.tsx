@@ -27,17 +27,23 @@ const isValidToken = (accessToken: string) => {
 //   }, timeLeft);
 // };
 
-const setSession = (accessToken: any) => {
-  if (accessToken) {
-    localStorage.setItem("accessToken", accessToken);
-    // axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+const getSession = () => {
+  const sessionJSON = window.localStorage.getItem("session");
+  if (sessionJSON) return JSON.parse(sessionJSON);
+  return {};
+};
+
+const setSession = (userData: any) => {
+  if (userData) {
+    localStorage.setItem("session", JSON.stringify(userData));
+    // axios.defaults.headers.common.Authorization = `Bearer ${authToken}`;
     // This function below will handle when token is expired
-    // const { exp } = jwtDecode(accessToken);
+    // const { exp } = jwtDecode(authToken);
     // handleTokenExpired(exp);
   } else {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("session");
     // delete axios.defaults.headers.common.Authorization;
   }
 };
 
-export { isValidToken, setSession, verify, sign };
+export { isValidToken, setSession, verify, sign, getSession };

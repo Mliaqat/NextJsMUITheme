@@ -8,11 +8,11 @@ function createGradient(color1: string, color2: string) {
 
 // SETUP COLORS
 const PRIMARY = {
-  lighter: "#C8FACD",
-  light: "#5BE584",
-  main: "#00AB55",
-  dark: "#007B55",
-  darker: "#005249",
+  lighter: "#42c383",
+  light: "#2bbc74",
+  main: "#13B464",
+  dark: "#11a25a",
+  darker: "#0f9050",
 };
 const SECONDARY = {
   lighter: "#D6E4FF",
@@ -50,7 +50,7 @@ const ERROR = {
   darker: "#7A0C2E",
 };
 
-const GREY = {
+const GREY: any = {
   0: "#FFFFFF",
   100: "#F9FAFB",
   200: "#F4F6F8",
@@ -71,6 +71,14 @@ const GREY = {
   500_80: alpha("#919EAB", 0.8),
 };
 
+const CHART_COLORS = {
+  violet: ["#826AF9", "#9E86FF", "#D0AEFF", "#F7D2FF"],
+  blue: ["#2D99FF", "#83CFFF", "#A5F3FF", "#CCFAFF"],
+  green: ["#2CD9C5", "#60F1C8", "#A4F7CC", "#C0F2DC"],
+  yellow: ["#FFE700", "#FFEF5A", "#FFF7AE", "#FFF3D6"],
+  red: ["#FF6C40", "#FF8F6D", "#FFBD98", "#FFF2D4"],
+};
+
 const GRADIENTS = {
   primary: createGradient(PRIMARY.light, PRIMARY.main),
   info: createGradient(INFO.light, INFO.main),
@@ -89,13 +97,14 @@ const COMMON = {
   error: { ...ERROR, contrastText: "#fff" },
   grey: GREY,
   gradients: GRADIENTS,
-  divider: GREY[500_24],
+  chart: CHART_COLORS,
+  divider: GREY["500_24"],
   action: {
-    hover: GREY[500_8],
-    selected: GREY[500_16],
-    disabled: GREY[500_80],
-    disabledBackground: GREY[500_24],
-    focus: GREY[500_24],
+    hover: GREY["500_8"],
+    selected: GREY["500_16"],
+    disabled: GREY["500_80"],
+    disabledBackground: GREY["500_24"],
+    focus: GREY["500_24"],
     hoverOpacity: 0.08,
     disabledOpacity: 0.48,
   },
@@ -113,7 +122,11 @@ const palette = {
     ...COMMON,
     mode: "dark",
     text: { primary: "#fff", secondary: GREY[500], disabled: GREY[600] },
-    background: { paper: GREY[800], default: GREY[900], neutral: GREY[500_16] },
+    background: {
+      paper: GREY[800],
+      default: GREY[900],
+      neutral: GREY["500_16"],
+    },
     action: { active: GREY[500], ...COMMON.action },
   },
 };

@@ -4,11 +4,15 @@ import { enqueueSnackbar } from "notistack";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 // @mui
-import { Stack, Grid, IconButton, InputAdornment } from "@mui/material";
+import { Stack, Grid, IconButton, InputAdornment, Link } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
 // components
-import { FormProvider, RHFTextField } from "../../../components/hook-form";
+import {
+  FormProvider,
+  RHFCheckbox,
+  RHFTextField,
+} from "@root/components/hook-form";
 //
 import { LoginFormSchema, defaultValues } from ".";
 
@@ -17,6 +21,8 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useLoginMutation } from "@root/services/auth";
 import useAuth from "@root/hooks/useAuth";
+import NextLink from "next/link";
+import { PATH_AUTH } from "@root/routes/paths";
 
 // ----------------------------------------------------------------------
 
@@ -77,9 +83,23 @@ export default function LoginForm() {
               InputProps={passwordEndAdornment}
               disabled={isSubmitting}
             />
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <RHFCheckbox name="remember" label="Remember me" />
+              <NextLink
+                href={PATH_AUTH.resetPassword}
+                style={{ textDecoration: "none" }}
+                passHref
+              >
+                <Link variant="subtitle2">Forgot password?</Link>
+              </NextLink>
+            </Stack>
             <LoadingButton
               fullWidth
-              color="info"
+              color="primary"
               size="large"
               type="submit"
               variant="contained"

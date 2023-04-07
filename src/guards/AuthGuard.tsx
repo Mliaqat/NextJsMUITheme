@@ -4,8 +4,9 @@ import { useRouter } from "next/router";
 // hooks
 import useAuth from "../hooks/useAuth";
 // components
-import Login from "../pages/auth/login";
 import LoadingScreen from "@root/components/LoadingScreen";
+import Layout from "@root/layouts";
+import LoginForm from "@root/sections/auth/login/LoginForm";
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +32,11 @@ export default function AuthGuard({ children }: any) {
     if (pathname !== requestedLocation) {
       setRequestedLocation(pathname);
     }
-    return <Login />;
+    return (
+      <Layout variant="auth" title="login">
+        <LoginForm />
+      </Layout>
+    );
   }
 
   return <>{children}</>;

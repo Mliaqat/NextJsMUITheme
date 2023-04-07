@@ -19,6 +19,7 @@ import Page from "@root/components/Page";
 // next-i18
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { Logo, LogoIcon } from "@root/assets/svg";
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +28,6 @@ const RootStyle = styled("div")(() => ({
 }));
 
 const ContentStyle = styled("div")(({ theme }) => ({
-  // overflow: "hidden",
   position: "relative",
   backgroundColor: theme.palette.background.default,
 }));
@@ -60,7 +60,8 @@ export default function Dashboard() {
           <HomeLookingFor />
 
           <HomeAdvertisement />  */}
-          {t("demo.title", { ns: "footer" })}
+          {/* {t("demo.title", { ns: "footer" })} */}
+          <Logo variant="dark" />
         </ContentStyle>
       </RootStyle>
     </Page>

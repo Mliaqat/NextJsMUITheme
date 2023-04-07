@@ -15,7 +15,7 @@ const DropZoneStyle = styled("div")(({ theme }: any) => ({
   padding: theme.spacing(5, 1),
   borderRadius: theme.shape.borderRadius,
   backgroundColor: theme.palette.background.neutral,
-  border: `1px dashed ${theme.palette.grey["500_32"]}`,
+  border: `1px dashed ${theme.palette.grey[500_32]}`,
   "&:hover": { opacity: 0.72, cursor: "pointer" },
 }));
 

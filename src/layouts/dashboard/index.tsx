@@ -1,104 +1,66 @@
 import { useState } from "react";
 // @mui
-import { styled } from "@mui/material/styles";
-import { Box } from "@mui/material";
-// hooks
-import useSettings from "../../hooks/useSettings";
-import useResponsive from "../../hooks/useResponsive";
-// import useCollapseDrawer from '../../hooks/useCollapseDrawer';
-// config
-import { HEADER, NAVBAR } from "../../config";
-//
-// import DashboardHeader from './header';
-// import NavbarVertical from './navbar/NavbarVertical';
-// import NavbarHorizontal from './navbar/NavbarHorizontal';
-
-// ----------------------------------------------------------------------
-
-// const MainStyle = styled('main', {
-//   shouldForwardProp: (prop) => prop !== 'collapseClick',
-// })(({ collapseClick, theme }) => ({
-//   flexGrow: 1,
-//   paddingTop: HEADER.MOBILE_HEIGHT + 24,
-//   paddingBottom: HEADER.MOBILE_HEIGHT + 24,
-//   [theme.breakpoints.up('lg')]: {
-//     paddingLeft: 16,
-//     paddingRight: 16,
-//     paddingTop: HEADER.DASHBOARD_DESKTOP_HEIGHT + 24,
-//     paddingBottom: HEADER.DASHBOARD_DESKTOP_HEIGHT + 24,
-//     width: `calc(100% - ${NAVBAR.DASHBOARD_WIDTH}px)`,
-//     transition: theme.transitions.create('margin-left', {
-//       duration: theme.transitions.duration.shorter,
-//     }),
-//     ...(collapseClick && {
-//       marginLeft: NAVBAR.DASHBOARD_COLLAPSE_WIDTH,
-//     }),
-//   },
-// }));
-
+import { Box, useTheme } from "@mui/material";
+// components
+import LeftNavbar from "./left-navbar/LeftNavbar";
+import Topnavbar from "./top-navbar/TopNavbar";
+import Rightnavbar from "./right-navbar/RightNavbar";
+import Footer from "./footer/testFooter";
 // ----------------------------------------------------------------------
 
 export default function DashboardLayout({ children }: any) {
-  // const { collapseClick, isCollapse } = useCollapseDrawer();
-
-  const { themeLayout }: any = useSettings();
-
-  const isDesktop = useResponsive("up", "lg");
-
+  const theme = useTheme();
   const [open, setOpen] = useState(false);
-
-  const verticalLayout = themeLayout === "vertical";
-
-  // if (verticalLayout) {
-  //   return (
-  //     <>
-  //      ÷ <DashboardHeader onOpenSidebar={() => setOpen(true)} verticalLayout={verticalLayout} />
-
-  //       {isDesktop ? (
-  //         <NavbarHorizontal />
-  //       ) : (
-  //         <NavbarVertical isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
-  //       )}
-
-  //       <Box
-  //         component="main"
-  //         sx={{
-  //           px: { lg: 2 },
-  //           pt: {
-  //             xs: `${HEADER.MOBILE_HEIGHT + 24}px`,
-  //             lg: `${HEADER.DASHBOARD_DESKTOP_HEIGHT + 80}px`,
-  //           },
-  //           pb: {
-  //             xs: `${HEADER.MOBILE_HEIGHT + 24}px`,
-  //             lg: `${HEADER.DASHBOARD_DESKTOP_HEIGHT + 24}px`,
-  //           },
-  //         }}
-  //       >
-  //         {children}
-  //       </Box>
-  //     </>
-  //   );
-  // }
-
-  // return (
-  //   <Box
-  //     sx={{
-  //       display: { lg: 'flex' },
-  //       minHeight: { lg: 1 },
-  //     }}
-  //   >
-  //     <DashboardHeader isCollapse={isCollapse} onOpenSidebar={() => setOpen(true)} />
-
-  //     <NavbarVertical isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
-
-  //     <MainStyle collapseClick={collapseClick}>{children}</MainStyle>
-  //   </Box>
-  // );
+  const [rightnavbars, setrightbars] = useState(false);
+  const handleDrawer = () => (open ? setOpen(false) : setOpen(true));
+  const handleDrawerright = () =>
+    rightnavbars ? setrightbars(false) : setrightbars(true);
 
   return (
-    <div>
-      <header>Dashboard</header>
-      {children}
-    </div>
+    <Box sx={{ width: "100%" }}>
+      <Box
+        sx={{
+          display: "flex",
+          position: "relative",
+          width: "100%",
+        }}
+      >
+        {/* leftnavabr */}
+        <LeftNavbar open={open} />
+        {/* topnavbar */}
+
+        <Box sx={{ width: "100%" }}>
+          <Topnavbar handleDrawer={handleDrawer} />
+          <Box
+            sx={{
+              [theme.breakpoints.up("xs")]: {
+                width: "100%",
+              },
+              [theme.breakpoints.up("sm")]: {
+                width:
+                  rightnavbars === true
+                    ? "calc(100% - 290px)"
+                    : "calc(100% - 65px)",
+                transition: "0.4s",
+              },
+            }}
+          >
+            <Rightnavbar
+              rightnavbars={rightnavbars}
+              handleDrawerright={handleDrawerright}
+            />
+            <Box
+              sx={{
+                pt: theme.spacing(2),
+                pl: theme.spacing(2),
+              }}
+            >
+              {children}
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      <Footer />
+    </Box>
   );
 }

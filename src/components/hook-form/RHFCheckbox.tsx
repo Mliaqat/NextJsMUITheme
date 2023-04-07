@@ -14,7 +14,13 @@ export function RHFCheckbox({ name, ...other }: any) {
         <Controller
           name={name}
           control={control}
-          render={({ field }) => <Checkbox {...field} checked={field.value} />}
+          render={({ field }) => (
+            <Checkbox
+              {...field}
+              checked={field.value}
+              sx={{ stroke: "#ffffff", strokeWidth: 1 }}
+            />
+          )}
         />
       }
       {...other}

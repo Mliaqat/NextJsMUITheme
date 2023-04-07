@@ -27,14 +27,17 @@ export const FormSchema = Yup.object().shape({
     .max(15, "Maximum 15 characters"),
   email: Yup.string().required("Email is required").email("Invalid Email"),
   age: Yup.number()
-    .typeError("Age must be a number")
+    .typeError("Age is required")
     .required("Age is required")
     .positive("Age must be a positive number")
     .integer()
     .moreThan(18, "Age must be greater than or equal to 18")
     .lessThan(120, "Age must be less than or equal to 120"),
-  startDate: Yup.string().required("Start date is required"),
-  endDate: Yup.string()
+  startDate: Yup.date()
+    .typeError("Start date is required")
+    .required("Start date is required"),
+  endDate: Yup.date()
+    .typeError("End date is required")
     .required("End date is required")
     .min(Yup.ref("startDate"), "End date must be later than start date"),
   password: Yup.string()

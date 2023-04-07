@@ -16,8 +16,17 @@
     "incremental": true,
     "paths": {
       "@root/*": ["./src/*"]
-    }
+    },
+    
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/sections/overview/mui/buttons/ToggleButtons.js",
+    "src/components/animate/FabButtonAnimate.js",
+    "src/theme/overrides/Accordion.js",
+    "src/theme/overrides/Alert.js"
+  ],
   "exclude": ["node_modules"]
 }

@@ -1,11 +1,7 @@
 import * as Yup from "yup";
-// utils
-import { fData } from "@root/utils/formatNumber";
-
-// ----------------------------------------------------------------------
 
 export const defaultValues = {
-  email: "mortgage_broker@yopmail.com",
+  email: "client@yopmail.com",
   password: "MGBasket$$786",
 };
 

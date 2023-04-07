@@ -27,7 +27,7 @@ const InputStyle = styled(TextField, {
   },
   "& fieldset": {
     borderWidth: `1px !important`,
-    borderColor: `${theme.palette.grey["500_32"]} !important`,
+    borderColor: `${theme.palette.grey[500_32]} !important`,
   },
 }));
 

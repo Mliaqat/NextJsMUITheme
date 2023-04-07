@@ -2,17 +2,17 @@ import { alpha } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
-function createGradient(color1: string, color2: string) {
-  return `linear-gradient(to bottom, ${color1}, ${color2})`;
+export function createGradient(color1: string, color2: string) {
+  return `linear-gradient(90deg, ${color1} 10.76%, ${color2} 133.7%)`
 }
 
 // SETUP COLORS
 const PRIMARY = {
-  lighter: "#42c383",
-  light: "#2bbc74",
-  main: "#13B464",
-  dark: "#11a25a",
-  darker: "#0f9050",
+  lighter: "#46a9a4",
+  light: "#2f9e98",
+  main: "#18938D",
+  dark: "#16847f",
+  darker: "#137671",
 };
 const SECONDARY = {
   lighter: "#D6E4FF",
@@ -79,6 +79,7 @@ const CHART_COLORS = {
   red: ["#FF6C40", "#FF8F6D", "#FFBD98", "#FFF2D4"],
 };
 
+
 const GRADIENTS = {
   primary: createGradient(PRIMARY.light, PRIMARY.main),
   info: createGradient(INFO.light, INFO.main),
@@ -98,13 +99,13 @@ const COMMON = {
   grey: GREY,
   gradients: GRADIENTS,
   chart: CHART_COLORS,
-  divider: GREY["500_24"],
+  divider: GREY[500_24],
   action: {
-    hover: GREY["500_8"],
-    selected: GREY["500_16"],
-    disabled: GREY["500_80"],
-    disabledBackground: GREY["500_24"],
-    focus: GREY["500_24"],
+    hover: GREY[500_8],
+    selected: GREY[500_16],
+    disabled: GREY[500_80],
+    disabledBackground: GREY[500_24],
+    focus: GREY[500_24],
     hoverOpacity: 0.08,
     disabledOpacity: 0.48,
   },
@@ -125,7 +126,7 @@ const palette = {
     background: {
       paper: GREY[800],
       default: GREY[900],
-      neutral: GREY["500_16"],
+      neutral: GREY[500_16],
     },
     action: { active: GREY[500], ...COMMON.action },
   },

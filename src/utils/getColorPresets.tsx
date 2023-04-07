@@ -19,7 +19,7 @@ export const colorPresets = [
     darker: "#672eb4",
     contrastText: "#fff",
   },
-  
+
   // Jazz Blue
   {
     name: "blue",
@@ -60,6 +60,16 @@ export const colorPresets = [
     darker: "#616574",
     contrastText: "#fff",
   },
+  // green
+  {
+    name: "green",
+    lighter: "#0E918C",
+    light: "#11a25a",
+    main: "#13B464",
+    dark: "#11a25a",
+    darker: "#2CB764",
+    contrastText: "#fff",
+  },
 ];
 
 export const defaultPreset = colorPresets[0];
@@ -68,11 +78,13 @@ export const bluePreset = colorPresets[2];
 export const orangePreset = colorPresets[3];
 export const turquoisePreset = colorPresets[4];
 export const charcoalPreset = colorPresets[5];
+export const greenPreset = colorPresets[6]
 
 export default function getColorPresets(presetsKey: string) {
   return {
     purple: purplePreset,
     blue: bluePreset,
+    green: greenPreset,
     orange: orangePreset,
     turquoise: turquoisePreset,
     charcoal: charcoalPreset,

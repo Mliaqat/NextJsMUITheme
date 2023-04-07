@@ -26,6 +26,7 @@ export const PATH_PAGE = {
   page404: "/404",
   page500: "/500",
   components: "/components",
+  textFields: "/components/textFields",
 };
 
 export const PATH_DASHBOARD = {

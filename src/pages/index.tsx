@@ -19,6 +19,7 @@ import Page from "@root/components/Page";
 // next-i18
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Components from "./components";
 
 // ----------------------------------------------------------------------
 
@@ -47,9 +48,11 @@ export default function HomePage() {
       <RootStyle>
         {/* <HomeHero /> */}
         <ContentStyle>
+        <Components/>
           {/* <HomeHugePackElements />
 
           <HomeDarkMode />
+          <Components
 
           <HomeColorPresets />
 
